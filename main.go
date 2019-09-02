@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
@@ -11,16 +10,13 @@ import (
 // To - do
 // Find processor type and number of cores
 // Find path
-// Find memory details
+// convert memory from kb to MB
 // Find volume and mount points
 // Will decide later
 
 func getOS() {
 	var osystem string
-	file, err := os.Open("/etc/os-release")
-	if err != nil {
-		log.Fatal(err)
-	}
+	file, _ := os.Open("/etc/os-release")
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
@@ -31,12 +27,26 @@ func getOS() {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-
 	osR := strings.Split(osystem, "=")
 	fmt.Printf("Your operating system is - %v \n", osR[1])
+}
+
+func getMem() {
+	var memTotal string
+	file, _ := os.Open("/proc/meminfo")
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		if strings.Contains(scanner.Text(), "MemTotal") {
+			memTotal = scanner.Text()
+		}
+	}
+
+	memTotalR := strings.Split(memTotal, ":")
+
+	fmt.Printf("Total Memory on this system is - %v\n", memTotalR[1])
 }
 
 func main() {
@@ -50,4 +60,5 @@ func main() {
 ###################################################################
 `)
 	getOS()
+	getMem()
 }
