@@ -12,7 +12,8 @@ import (
 // Find path
 // convert memory from kb to MB
 // Find volume and mount points
-// Will decide later
+// Will decide
+// test comment
 
 func getOS() {
 	var osystem string
@@ -50,6 +51,7 @@ func getMem() {
 }
 
 func main() {
+	var something int
 	fmt.Println(`
 
 ###################################################################
