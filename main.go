@@ -13,7 +13,7 @@ import (
 // convert memory from kb to MB
 // Find volume and mount points
 // Will decide
-// test comment
+// one more comment
 
 func getOS() {
 	var osystem string
