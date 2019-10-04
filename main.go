@@ -12,8 +12,6 @@ import (
 // Find path
 // convert memory from kb to MB
 // Find volume and mount points
-// Will decide
-// one more comment
 
 func getOS() {
 	var osystem string
